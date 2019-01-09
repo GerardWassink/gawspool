@@ -1,6 +1,6 @@
 # gaw_spool_que
 ## Description
-This is php code to display pdf files in a given directory and to be able to purge them.
+This is php code to show pdf output files from MVS under Hercules that are created in a given directory and to be able to view or purge them.
 
 ## how?
 In your website's directory:
