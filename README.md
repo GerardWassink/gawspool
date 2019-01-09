@@ -1,5 +1,6 @@
 # gaw_spool_que
-php code to display pdf files in a given directory and to be able to purge them
+## Description
+This is php code to display pdf files in a given directory and to be able to purge them.
 
 ## how?
 In your website's directory:
