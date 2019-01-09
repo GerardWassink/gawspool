@@ -2,7 +2,7 @@
 ## Description
 This is php code to show pdf output files from MVS under Hercules that are created in a given directory and to be able to view or purge them.
 
-## how?
+## How?
 In your website's directory:
 - create a subdirectory named 'classa'
 - store both .php files in your website root
