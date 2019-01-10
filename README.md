@@ -16,11 +16,11 @@ Point your web-browser to the gawspool.php
 Last but not least: alter your mechanism that creates the pdf files to make them filemode 777 for these programs to be able to manipulate them back and forth.
 
 ## The files ##
-gawspool.php - displays the main screen with some explanation (in sofar it's needed).
-gawspcla.php - displays the files that were printed out of Hercules
-gawspurg.php - on a click from gawslcla, purges the indicated file (moves it to the 'purged' queue)
-gawsprgd.php - displays the files that are in the 'purged' queue
-gawsprst.php - on a click from gawsprgd, restores the indicated file (moves it back to the class A queue)
-gawsphdr.php - displays the header on every screen
-gawspftr.php - you guessed it, displays the footers
+- gawspool.php - displays the main screen with some explanation (in sofar it's needed).
+- gawspcla.php - displays the files that were printed out of Hercules
+- gawspurg.php - on a click from gawslcla, purges the indicated file (moves it to the 'purged' queue)
+- gawsprgd.php - displays the files that are in the 'purged' queue
+- gawsprst.php - on a click from gawsprgd, restores the indicated file (moves it back to the class A queue)
+- gawsphdr.php - displays the header on every screen
+- gawspftr.php - you guessed it, displays the footers
 
