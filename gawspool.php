@@ -21,6 +21,8 @@ print "At this moment it contains two queues, tha class A queue where<br/>";
 print "Hercules deposits it's output, and the 'purged' queue where<br/>";
 print "we find output that has been purged from tha class A queue.<br/>";
 print "<br/>";
+print "Feel free to get <a href='https://github.com/GerardWassink/gawspool' target='_blank'>your copy from Github here</a>.<br/>";
+print "<br/>";
 print "In the near future automated processes will be in place to<br/>";
 print "'empty the trash', in other words: really delete purged output<br/>";
 print "periodically, let's say once a day.<br/>";
