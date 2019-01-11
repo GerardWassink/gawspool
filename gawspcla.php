@@ -75,8 +75,8 @@ print "</table>";					/* --- End of table			--- */
 
 print "<h3>Usage:</h3>";
 print "<ul>";
-print "<li>Click on jobnumber to view the job in a seperate window (close window to return here)</li>";
-print "<li>Click on 'purge' to purge the job (tread carefully, gone is gone)</li>";
+print "<li>Click on jobnumber to view the job in a seperate window</li>";
+print "<li>Click on 'purge' to purge the job</li>";
 print "</ul>";
 
 include 'gawspftr.php';
