@@ -2,6 +2,7 @@
 
 include 'gawsphdr.php';
 
+print "<br/>";
 print "<hr width=" . $wdt . " align='left'>";
 print "<pre>";
 print "  _____     __          _______ _____   ____   ____  _      <br/>";
@@ -24,7 +25,7 @@ print "In the near future automated processes will be in place to<br/>";
 print "'empty the trash', in other words: really delete purged output<br/>";
 print "periodically, let's say once a day.<br/>";
 print "<br/>";
-print "Please make your choice in the menu below:<br/>";
+print "Please make your choice in the menu above.<br/>";
 print "<br/>";
 
 include 'gawspftr.php';
