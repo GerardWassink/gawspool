@@ -11,7 +11,9 @@ In your website's directory:
 In your hercules config file: 
 - have device 1403 spool to the prtspool utility that creates pdf files and point it to the classa directory
 
-Point your web-browser to the gawspool.php 
+Point your web-browser to one of the .php files:
+* gawspool.php 
+* gawspcla.php
 
 Last but not least: alter your mechanism that creates the pdf files to make them filemode 777 for these programs to be able to manipulate them back and forth.
 
