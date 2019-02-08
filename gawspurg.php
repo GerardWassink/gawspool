@@ -1,6 +1,6 @@
 <?php
 /* ------------------------------------------------------------------------ *
- * Program              :       purge_job.php
+ * Program              :       gawspurg_job.php
  * Author               :       Gerard Wassink
  * Date                 :       January 2019
  *
@@ -29,15 +29,14 @@
  *                              Copyright (C) 2019 Gerard Wassink
  * ------------------------------------------------------------------------ */
 
-  $sysnam = exec("uname -n");
-  print "<h1>" . $sysnam . "</h1>";
-
   if (!empty($_GET['fn'])) $fn = $_GET['fn'];
   if (!empty($_GET['jn'])) $jn = $_GET['jn'];
 
-  if ( is_writable($fn) ) {
+  $fn = "./classa/" . basename($fn);
+
+  if ( is_writable($fn) && is_file($fn )) {
     print "Purging job " . $jn . " - file name: " . $fn . "<br />";
-    $cmd = "mv " . $fn . " ./purged";
+    $cmd = "mv " . $fn . " " . $fn . ".purged";
     exec($cmd);
     if(isset($_SERVER['HTTP_REFERER'])) {
        $url = $_SERVER['HTTP_REFERER'];
@@ -48,7 +47,6 @@
     }
   } else {
     print "Told you: I'm not authorized to purge job " . $jn . "<br />";
-    print "Still working on some authorization issues on the server.<br/>";
   }
 
 ?>
