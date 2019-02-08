@@ -28,50 +28,52 @@
  * ------------------------------------------------------------------------ */
 
 $path = "./classa";					/* --- directory for class A output 	--- */
-$files = array_diff(scandir($path), array('.', '..'));	/* --- get file names 			--- */
+$patt = "*.pdf";								/* --- Search pattern 		--- */
+$srchfor = $path."/".$patt;
+$files = array_diff(glob($srchfor), array('.', '..'));	/* --- get file names - */
 
 include 'gawsphdr.php';
 
-print "<h1>class A output queue</h1>";			/* --- Create headers			--- */
+print "<h1>class A output queue</h1>";			/* --- Create headers		--- */
 
-print "<table border='0'>";				/* --- Start of table			--- */
+print "<table border='0'>";						/* --- Start of table		--- */
 print "<tr bgcolor='#1a5ab3'><th>&nbsp;#&nbsp;&nbsp;</th><th>jobnum</th><th>jobname</th><th>purge</th></tr>";
 
-$num = 1;						/* --- sequence number			--- */
-foreach($files as $filename) {				/* --- cycle thru file names		--- */
-  $fqn = $path . "/" . $filename;			/* --- Make full qualified name		--- */
+$num = 1;										/* --- sequence number		--- */
+foreach($files as $filename) {					/* --- cycle thru file names--- */
+  $filename = basename($filename);
+  $parts = explode("-", $filename);				/* --- split filename and get-- */
+  $jobnum = $parts[0];							/* ---    the jobnumber		--- */
+  $jobnam = explode(".", $parts[1])[0];			/* ---    and the jobname	--- */
 
-  $parts = explode("-", $filename);			/* --- split filename and get		--- */
-  $jobnum = $parts[0];					/* ---    the jobnumber			--- */
-  $jobnam = explode(".", $parts[1])[0];			/* ---    and the jobname		--- */
-
-  if ( is_writable($fqn) ) {				/* --- check writability		--- */
-    $pur_txt = "<a href='./gawspurg.php?fn=" . $fqn . "&jn=" . $jobnum . "'>purge</a>";
+												/* --- check writability	--- */
+  if ( is_writable($path."/".$filename) && is_file($path."/".$filename) ) {	
+    $pur_txt = "<a href='./gawspurg.php?fn=" . $filename . "&jn=" . $jobnum . "'>purge</a>";
   } else {
-    $pur_txt = "<a href='./gawspurg.php?fn=" . $fqn . "&jn=" . $jobnum . "'>noauth</a>";
+    $pur_txt = "<a href='./gawspurg.php?fn=" . $filename . "&jn=" . $jobnum . "'>noauth</a>";
   }
 
- 							/* --- write table lines		--- */
-  if ( $num % 2 ) {					/* --- odd or even ?			--- */
-    $bg = "#dddddd";					/* --- color for odd numbers            --- */
+												/* --- write table lines	--- */
+  if ( $num % 2 ) {								/* --- odd or even ?		--- */
+    $bg = "#dddddd";							/* --- color for odd numbers--- */
   } else {
-    $bg = "#ffffff";					/* --- color for even number            --- */
+    $bg = "#ffffff";							/* --- color for even number--- */
   }
 
-							/* --- print every line			--- */
+												/* --- print every line		--- */
   print "<tr bgcolor='" . $bg . "'>";			/* --- row header			--- */
-  print "<td align='center'>" . $num . "</td>";		/* --- Sequence number			--- */
-  print "<td align='center'>";				/* --- print				--- */
-  print   "<a href='" . $fqn . "' target='_blank'>";	/* ---   job numer			--- */
-  print   $jobnum . "</a></td>";			/* ---     and create link for viewing	--- */
-  print "<td align='left'  >" . $jobnam . "</td>";	/* --- Job name				--- */
-  print "<td align='center'>" . $pur_txt . "</td>";	/* --- Can we purge?			--- */
-  print "</tr>";					/* --- End of row 			--- */
+  print "<td align='center'>" . $num . "</td>";	/* --- Sequence number		--- */
+  print "<td align='center'>";					/* --- print				--- */
+  print   "<a href='" . $path."/".$filename . "' target='_blank'>";	/* jobnumber*/
+  print   $jobnum . "</a></td>";				/* --- and create link for viewing */
+  print "<td align='left'  >" . $jobnam . "</td>";	/* --- Job name			--- */
+  print "<td align='center'>" . $pur_txt . "</td>";	/* --- Can we purge?	--- */
+  print "</tr>";								/* --- End of row 			--- */
 
-  $num++;						/* --- next line			--- */
+  $num++;										/* --- next line			--- */
 }
 
-print "</table>";					/* --- End of table			--- */
+print "</table>";								/* --- End of table			--- */
 
 print "<h3>Usage:</h3>";
 print "<ul>";
