@@ -10,7 +10,7 @@ In your website's directory:
 
 In your hercules config file: 
 - have device 1403 spool to the prtspool utility that creates pdf files in the classa directory
-- (see [http://nerd.gerardwassink.nl/s370/printing-to-pdf/ this link on how to do that])
+- (see [this link on how to do that](http://nerd.gerardwassink.nl/s370/printing-to-pdf/) )
 
 Point your web-browser to one of the following .php files:
 * gawspool.php
