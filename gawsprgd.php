@@ -1,6 +1,6 @@
 <?php
 /* ------------------------------------------------------------------------ *
- * Program		:	purged.php
+ * Program		:	gawsprgd.php
  * Author		:	Gerard Wassink
  * Date			:	January 2019
  *
@@ -27,48 +27,52 @@
  *				Copyright (C) 2019 Gerard Wassink
  * ------------------------------------------------------------------------ */
 
-$path = "./purged";				/* --- directory for class A output 	--- */
-$files = array_diff(scandir($path), array('.', '..'));	/* --- get file names 			--- */
+$path = "./classa";							/* --- output directory  	--- */
+$patt = "*.purged";							/* search for purged files	--- */
+$srchfor = $path."/".$patt;
+$files = array_diff(glob($srchfor), array('.', '..'));	/* get file names - */
 
-include 'gawsphdr.php';
-print "<h1>Purged output</h1>";				/* --- get system name			--- */
+include 'gawsphdr.php';						/* --- Display screen header -- */
 
-print "<table border='0'>";				/* --- Start of table			--- */
+print "<h1>Purged output</h1>";				/* --- get system name		--- */
+
+print "<table border='0'>";					/* --- Start of table		--- */
 print "<tr bgcolor='#1a5ab3'><th>&nbsp;#&nbsp;&nbsp;</th><th>jobnum</th><th>jobname</th><th>restore</th></tr>";
 
-$num = 1;						/* --- sequence number			--- */
-foreach($files as $filename) {				/* --- cycle thru file names		--- */
-  $fqn = $path . "/" . $filename;			/* --- Make full qualified name		--- */
+$num = 1;									/* --- sequence number		--- */
+foreach($files as $filename) {				/* --- cycle thru file names -- */
+  $filename = basename($filename);			/* --- Make full qualified name */
 
-  $parts = explode("-", $filename);			/* --- split filename and get		--- */
-  $jobnum = $parts[0];					/* ---    the jobnumber			--- */
-  $jobnam = explode(".", $parts[1])[0];			/* ---    and the jobname		--- */
+  $parts = explode("-", $filename);			/* --- split filename and get - */
+  $jobnum = $parts[0];						/* ---    the jobnumber		--- */
+  $jobnam = explode(".", $parts[1])[0];		/* ---    and the jobname	--- */
 
-  if ( is_writable($fqn) ) {				/* --- check writability		--- */
-    $rst_txt = "<a href='./gawsprst.php?fn=" . $fqn . "&jn=" . $jobnum . "'>restore</a>";
+											/* --- check writability	--- */
+  if ( is_writable($path."/".$filename) && is_file($path."/".$filename) ) {
+    $rst_txt = "<a href='./gawsprst.php?fn=" . $filename . "&jn=" . $jobnum . "'>restore</a>";
   } else {
-    $rst_txt = "<a href='./gawsprst.php?fn=" . $fqn . "&jn=" . $jobnum . "'>noauth</a>";
+    $rst_txt = "<a href='./gawsprst.php?fn=" . $filename . "&jn=" . $jobnum . "'>noauth</a>";
   }
 
- 							/* --- write table lines		--- */
-  if ( $num % 2 ) {					/* --- odd or even ?			--- */
-    $bg = "#dddddd";					/* --- color for odd numbers            --- */
+											/* --- write table lines	--- */
+  if ( $num % 2 ) {							/* --- odd or even ?		--- */
+    $bg = "#dddddd";						/* --- color for odd numbers -- */
   } else {
-    $bg = "#ffffff";					/* --- color for even number            --- */
+    $bg = "#ffffff";						/* --- color for even number -- */
   }
 
-							/* --- print every line			--- */
-  print "<tr bgcolor='" . $bg . "'>";			/* --- row header			--- */
-  print "<td align='center'>" . $num . "</td>";		/* --- Sequence number			--- */
-  print "<td align='center'>" . $jobnum . "</td>";	/* --- Job number			--- */
-  print "<td align='left'  >" . $jobnam . "</td>";	/* --- Job name				--- */
-  print "<td align='center'>" . $rst_txt . "</td>";	/* --- Can we restore?			--- */
-  print "</tr>";					/* --- End of row 			--- */
+											/* --- print every line		--- */
+  print "<tr bgcolor='" . $bg . "'>";		/* --- row header			--- */
+  print "<td align='center'>" . $num . "</td>";		/* --- Sequence number	*/
+  print "<td align='center'>" . $jobnum . "</td>";	/* --- Job number	--- */
+  print "<td align='left'  >" . $jobnam . "</td>";	/* --- Job name		--- */
+  print "<td align='center'>" . $rst_txt . "</td>";	/* --- Can we restore?	*/
+  print "</tr>";							/* --- End of row 			--- */
 
-  $num++;						/* --- next line			--- */
+  $num++;									/* --- next line			--- */
 }
 
-print "</table>";					/* --- End of table			--- */
+print "</table>";							/* --- End of table			--- */
 
 print "<h3>Usage:</h3>";
 print "<ul>";
