@@ -28,15 +28,15 @@
  *                              Copyright (C) 2019 Gerard Wassink
  * ------------------------------------------------------------------------ */
 
-  $sysnam = exec("uname -n");
-  print "<h1>" . $sysnam . "</h1>";
-
   if (!empty($_GET['fn'])) $fn = $_GET['fn'];
   if (!empty($_GET['jn'])) $jn = $_GET['jn'];
 
-  if ( is_writable($fn) ) {
+  $bqn = "./classa/".basename($fn);
+  $rqn = "./classa/".basename($fn, ".purged");
+  
+  if ( is_writable($bqn) && is_file($bqn) ) {
     print "Restoring job " . $jn . " - file name: " . $fn . " to class A queue<br />";
-    $cmd = "mv " . $fn . " ./classa";
+    $cmd = "mv " . $bqn . " " . $rqn;
     exec($cmd);
     if(isset($_SERVER['HTTP_REFERER'])) {
        $url = $_SERVER['HTTP_REFERER'];
@@ -48,5 +48,4 @@
   } else {
     print "Told you: I'm not authorized to restore job " . $jn . "<br />";
   }
-
 ?>
